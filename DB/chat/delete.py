@@ -1,4 +1,4 @@
-from backend.DB.db_init import db
+from DB.db_init import db
 from fastapi import APIRouter, HTTPException
 from Models.Chat import Chat
 

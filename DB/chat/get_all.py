@@ -1,8 +1,15 @@
-from backend.DB.db_init import db
 from fastapi import APIRouter, HTTPException
-from typing import List
+from DB.db_init import db
+from bson import ObjectId
 
 router = APIRouter()
+
+def chat_serializer(chat):
+    return {
+        "id": str(chat['_id']),
+        "title": chat.get('title', 'Untitled'),  # Use a default value like "Untitled" if "title" is missing
+        # Add other fields you want to return here
+    }
 
 @router.get("/user/{user_email}/chats")
 async def getAllChatsForUser(user_email: str):
@@ -10,9 +17,11 @@ async def getAllChatsForUser(user_email: str):
 
     # Find all chats where the user is a participant
     user_chats = list(chat_entity.find({"participants": user_email}))
-    
+
     if not user_chats:
         raise HTTPException(status_code=404, detail="No chats found for this user")
-  
-    # Return the list of chats
-    return user_chats
+
+    # Convert each chat to a serializable format
+    serialized_chats = [chat_serializer(chat) for chat in user_chats]
+
+    return {"chats":serialized_chats}

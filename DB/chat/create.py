@@ -17,7 +17,8 @@ async def addChat(
 
     # Insert the new chat into the database
     chat_entity.insert_one({"participants":chat.participants,
-                          
+                          "title":chat.title,
+                          "created_at":chat.created_at
                             })
 
     return {"message": "Chat added successfully"}
