@@ -9,3 +9,7 @@ class Chat(BaseModel):
     participants: List[str]  # List of participant user emails or IDs
     created_at: datetime  # Timestamp for when the chat was created
     title:str
+    messages:List [Message]=[]
+    chunks:int =500
+    numofresults:int =1
+    fileNames:List[str] = [""] 
