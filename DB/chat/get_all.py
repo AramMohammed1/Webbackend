@@ -6,7 +6,7 @@ router = APIRouter()
 
 def chat_serializer(chat):
     return {
-        "id": str(chat['_id']),
+        "_id": str(chat['_id']),
         "title": chat.get('title', 'Untitled'),  # Use a default value like "Untitled" if "title" is missing
         # Add other fields you want to return here
     }
