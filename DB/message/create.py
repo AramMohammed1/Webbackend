@@ -12,8 +12,6 @@ async def addMessage(chat_id: str, message: Message):
     chat_entity = db.Chat
     chat_object_id = ObjectId(chat_id)
     
-    print("WAWA")  # Printed to confirm entry into the function
-
     # Find the chat by chat_id
     chat = chat_entity.find_one({"_id": chat_object_id})
     
@@ -33,11 +31,12 @@ async def addMessage(chat_id: str, message: Message):
     # Ensure the keys 'chunks' and 'numofresults' exist in the chat document
     chunks = chat.get('chunks', 500)  # Default value of 500 if 'chunks' is not found
     numofresults = chat.get('numofresults', 1) 
-
+    filenames=chat.get('fileName',"")
     print("Chunks:", chunks, "Numofresults:", numofresults)
 
     # Prepare the payload for the external API request
     external_payload = {
+        'filenames':filenames,
         'chunks': chunks,
         'numofresults': numofresults,
         'question': message.content,
