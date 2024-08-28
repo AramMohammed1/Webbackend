@@ -7,6 +7,7 @@ from DB.user.create import router as createUser
 from DB.user.verfiy import router as verfiyUser
 from DB.user.delete import router as deleteUser
 from DB.message.create import router as createMessage
+from DB.chat.update import router as updateChat
 app=FastAPI()
 
 
@@ -24,3 +25,4 @@ app.include_router(createUser)
 app.include_router(verfiyUser)
 app.include_router(deleteUser)
 app.include_router(createMessage)
+app.include_router(updateChat)

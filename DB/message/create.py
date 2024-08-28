@@ -81,4 +81,4 @@ async def addMessage(chat_id: str, message: Message):
             print("General Exception:", repr(e))  # Use repr to capture the full exception details
             raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
-    return {"message": "Message added successfully and external service notified"}
+    return responseMessage
