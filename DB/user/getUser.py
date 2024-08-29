@@ -5,9 +5,8 @@ from Models.User import User
 from pydantic import BaseModel, EmailStr
 from passlib.context import CryptContext
 
+def getUser(email:str):
+    entity = db.User
 
-
-def addUser(user:User):
-    entity=db.User
-    entity.insert_one({"name":user.username,"password":user.password,"email":user.email})
-    return {"message": "User added successfully"}
+    user = entity.find_one({"email":email})
+    return user
