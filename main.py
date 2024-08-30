@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from DB.chat.get_all import router as getallChatRouter
-from DB.chat.create import router as createChatRouter
-from DB.chat.get_one import router as getChatRouter
-from DB.user.verfiy import router as verfiyUser
-from DB.user.delete import router as deleteUser
-from DB.message.create import router as createMessage
-from DB.chat.update import router as updateChat
-from auth import router as auth
+from api.chat.get_all import router as getallChatRouter
+from api.chat.create import router as createChatRouter
+from api.chat.get_one import router as getChatRouter
+from externals.DB.user.verfiy import router as verfiyUser
+from externals.DB.user.delete import router as deleteUser
+from api.message.create import router as createMessage
+from api.chat.update import router as updateChat
+from api.auth.auth import router as auth
 app=FastAPI()
 
 
@@ -21,7 +21,6 @@ app.add_middleware(
 app.include_router(getallChatRouter)
 app.include_router(createChatRouter)
 app.include_router(getChatRouter)
-
 app.include_router(verfiyUser)
 app.include_router(deleteUser)
 app.include_router(createMessage)
