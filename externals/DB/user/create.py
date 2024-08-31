@@ -9,5 +9,6 @@ from passlib.context import CryptContext
 
 def addUser(user:User):
     entity=db.User
+    
     entity.insert_one({"name":user.username,"password":user.password,"email":user.email})
     return {"message": "User added successfully"}

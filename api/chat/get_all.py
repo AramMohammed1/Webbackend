@@ -13,5 +13,6 @@ router = APIRouter()
 async def getAllChats(
         token: HTTPAuthorizationCredentials = Depends(oauth2_scheme)
 ):
+    
     id = get_current_user(token.credentials)
     return getAllChatsForUser(id=id)

@@ -11,9 +11,7 @@ def getAllChatsForUser(id: str):
     chat_entity = db.Chat
 
     user_chats = list(chat_entity.find({"participants": id}))
-
-    if not user_chats:
-        raise HTTPException(status_code=404, detail="No chats found for this user")
+    print(id)
 
     # Convert each chat to a serializable format
     serialized_chats = [chat_serializer(chat) for chat in user_chats]

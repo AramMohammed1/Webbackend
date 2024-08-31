@@ -16,11 +16,15 @@ oauth2_scheme = HTTPBearer()
 router = APIRouter()
 
 
+class ver(BaseModel) :
+    email:str
+    password:str
+
 @router.post("/users/login")
 async def login(
-    email:str,password:str
+    ve:ver
 ):
-    user = authenticate_user(email,password)
+    user = authenticate_user(ve.email,ve.password)
     
     accessToken = create_access_token(
         {
@@ -33,6 +37,12 @@ async def login(
 async def signup(model:SignUp):
     hash_password = get_password_hash(model.password)
     user = User(id="",username=model.email, email=model.email ,password=hash_password)
-    print(addUser(user))
-    return {"message":"ok"}
-
+    addUser(user)
+    user = authenticate_user(model.email,model.password)
+    accessToken = create_access_token(
+        {
+            "id":str(user['_id']),
+        }
+    )
+    return accessToken
+    
