@@ -17,7 +17,6 @@ def updateChat(chat_id: str,
     chat_entity = db.Chat
     chat_object_id = ObjectId(chat_id)
 
-    # Find the chat by chat_id
     chat = chat_entity.find_one({"_id": chat_object_id})
     
     if not chat:
@@ -25,20 +24,17 @@ def updateChat(chat_id: str,
     
  
     
-    # Update the chat document with the new data
     update_result = chat_entity.update_one(
         {"_id": chat_object_id},
         {
             "$set": {
                 "chunks":config.chunks,
                 "numofresults": config.numofresults,
+                "modelname":config.modelname,
             }
         }
     )
     
-
-
-
     return {"message": "Chat updated successfully"}
 
 
@@ -48,6 +44,7 @@ def updateChat(chat_id: str,
 async def updateChatFiles(    chat_id: str,
 
     files: List[UploadFile]=File(...)
+    
 ):
     chat_entity = db.Chat
     chat_object_id = ObjectId(chat_id)

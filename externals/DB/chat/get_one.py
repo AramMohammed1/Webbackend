@@ -20,6 +20,7 @@ def getChat(chat_id: str,userId:str):
         raise HTTPException(status_code=404, detail="Chat not found")
     
     chat['_id'] = str(chat['_id'])
+    print (chat)
     # Return the chat data
     return chat
 

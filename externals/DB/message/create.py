@@ -33,7 +33,7 @@ async def addMessage(chat_id: str, message: Message):
     chunks = chat.get('chunks', 500)  # Default value of 500 if 'chunks' is not found
     numofresults = chat.get('numofresults', 1) 
     filenames=chat.get('fileName',"")
-    print("Chunks:", chunks, "Numofresults:", numofresults)
+    modelname=chat.get('modelname',"llama3")
 
     # Prepare the payload for the external API request
     external_payload = {
@@ -41,6 +41,7 @@ async def addMessage(chat_id: str, message: Message):
         'chunks': chunks,
         'numofresults': numofresults,
         'question': message.content,
+        'modelname':modelname,
     }
 
     print("External payload:", external_payload)

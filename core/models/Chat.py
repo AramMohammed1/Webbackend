@@ -14,3 +14,4 @@ class Chat(BaseModel):
     chunks:int =500
     numofresults:int =1
     fileNames:List[str] = [""] 
+    modelname:str=""

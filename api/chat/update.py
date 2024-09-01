@@ -9,12 +9,15 @@ from typing import List
 
 oauth2_scheme = HTTPBearer()
 router = APIRouter()
+
 @router.post("/chat/{chat_id}/update")
-async def updateChatById(chat_id: str,
-    config:Config,
+async def updateChatById(
+    chat_id: str,
+    config: Config,
     token: HTTPAuthorizationCredentials = Depends(oauth2_scheme)
+
 ):
-    get_current_user(token.credentials)
+    id=get_current_user(token.credentials)
     return updateChat(chat_id,config)
     
 
